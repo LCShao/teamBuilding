@@ -26,6 +26,12 @@
       </view>
     </view>
     <view class="tunnel-text">
+      <view class="section__title">手机号</view>
+      <view class="inputdialog">
+        <view>{{phone}}</view>
+      </view>
+    </view>
+    <view class="tunnel-text">
       <view class="section__title">是否参加</view>
       <radio-group name="radio-group" class="inputdialog" bindchange="getIsJoin">
         <label><radio class="radiobtn" value="1" checked="{{isJoin}}"/>参加</label>

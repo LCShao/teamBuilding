@@ -11,7 +11,8 @@ Page({
     Fp: 0,
     Tp: 0,
     ename:'',
-    isJoin: true
+    isJoin: true,
+    phone:"13512312345"
   },
 
   onLoad: function() {
