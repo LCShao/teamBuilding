@@ -1,0 +1,79 @@
+<!--index.wxml-->
+<view class="container" >
+  <!-- <view>
+    <image>团建图标</image>
+  </view> -->
+  <!-- 用户 openid -->
+  <view class="userinfo">
+    <div bindgetuserinfo="onGetUserInfo" style="background-image: url({{avatarUrl}})" class="userinfo-avatar">
+    </div>
+    <view class="userinfo-nickname">hello, {{userInfo.nickName}}</view>
+    <!-- <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+    ></button> -->
+    <!-- <view>
+      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+    </view> -->
+  </view>
+  <!-- <form bindsubmit="formSubmit" bindreset="formReset" class="forminfo"> -->
+    <view class="tunnel-text">
+      <view class="section__title">员工姓名</view>
+      <view class="inputdialog">
+        <input name="input" value="{{ename}}" placeholder="请输入......" bindinput="getEname"/>
+      </view>
+    </view>
+    <view class="tunnel-text">
+      <view class="section__title">是否参加</view>
+      <radio-group name="radio-group" class="inputdialog" bindchange="getIsJoin">
+        <label><radio class="radiobtn" value="1" checked="{{isJoin}}"/>参加</label>
+        <label style="margin-left:10%"><radio value="0"  class="radiobtn" checked="{{!isJoin}}"/>不参加</label>
+      </radio-group>
+    </view>
+    <view class="tunnel-text">
+      <button form-type="submit" bindtap="formSubmit">提交</button>
+      <button form-type="reset" bindtap="formReset">重置</button>
+    </view>
+  <!-- </form> -->
+      <progress percent="{{Tp}}"  stroke-width="30" class="progress" backgroundColor="light-gray">
+        <text class="text">{{Tp}}人已报名</text>
+      </progress>
+  
+  <!-- <progress class="progress" percent="{{Fp}}" stroke-width="30" activeColor="red" /> -->
+  <image src="cloud://teambuilding-zap24.7465-teambuilding-zap24/df7a88b378a00b1ba69cf03a95ed6ecf.png"></image>
+  <!-- 上传图片 -->
+  <!-- <view class="uploader">
+    <view class="uploader-text" bindtap="doUpload">
+      <text>上传图片</text>
+    </view>
+    <view class="uploader-container" wx:if="{{imgUrl}}">
+      <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+    </view>
+  </view> -->
+
+
+  <!-- 操作数据库 -->
+  <!-- <view class="uploader">
+    <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
+      <text>前端操作数据库</text>
+    </navigator>
+  </view> -->
+
+  <!-- 新建云函数 -->
+  <!-- <view class="uploader">
+    <navigator url="../addFunction/addFunction" open-type="navigate" class="uploader-text">
+      <text>快速新建云函数</text>
+    </navigator>
+  </view> -->
+
+  <!-- 云调用 -->
+  <!-- <view class="uploader">
+    <navigator url="../openapi/openapi" open-type="navigate" class="uploader-text">
+      <text>云调用</text>
+    </navigator>
+  </view> -->
+
+
+</view>

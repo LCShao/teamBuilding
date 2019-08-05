@@ -1,0 +1,95 @@
+/**index.wxss**/
+
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+.userinfo{
+  margin-top: 40rpx;
+  height: 140rpx;
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: none;
+  border-right: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: white;
+}
+
+.userinfo-avatar:after {
+  border: none;
+}
+
+.userinfo-nickname {
+  font-size: 32rpx;
+  color: #007aff;
+  background-color: white;
+  background-size: cover;
+}
+
+.userinfo-nickname::after {
+  border: none;
+}
+
+
+.tunnel-text {
+  line-height: 52px;
+  font-size: 34rpx;
+  color: #007aff;
+}
+
+.tunnel-text {
+  width:100%;
+  position: relative;
+  color: #222;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tunnel-text:first-child {
+  border-top: none;
+}
+
+
+.disable {
+  color: #888;
+}
+.progress{
+  height: 50rpx;
+  margin-top:40rpx;
+  width: 90%;
+  position: relative;
+}
+.text{
+  width:200rpx;
+  height: 50rpx;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  margin-top:-25rpx;
+  margin-left: -100rpx;
+}
+.inputdialog{
+  width:60%;
+}
