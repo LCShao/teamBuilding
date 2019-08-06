@@ -16,6 +16,5 @@ exports.main = async (event, context) => {
       isJoin: false, // 只选择不参加的人数
     })
     .count()
-  // console.log(Tp.total, Fp.total)
   return {Tp:Tp.total, Fp:Fp.total}
 }

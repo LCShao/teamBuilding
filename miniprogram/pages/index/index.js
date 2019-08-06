@@ -11,8 +11,7 @@ Page({
     Fp: 0,
     Tp: 0,
     ename:'',
-    isJoin: true,
-    phone:"13512312345"
+    isJoin: true
   },
 
   onLoad: function() {
@@ -43,26 +42,20 @@ Page({
       // 云函数名称
       name: 'getTotal',
       // 传给云函数的参数
-    })
-      .then(res => {
-        console.log(res.result)
+    }).then(res => {
         this.setData({
           ...(res.result)
         })
-      })
-      .catch(console.error)
-    
+      }).catch(console.error)
   },
   onGetUserInfo: function (e) {
     if (!this.logged && e.detail.userInfo) {
       this.setData({
         logged: true,
         avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo,
-        nickName: e.detail.userInfo.nickName
+        userInfo: e.detail.userInfo
       })
     }
-
   },
 
   getEname:function(e){
@@ -90,12 +83,13 @@ Page({
       data: {
         ename: this.data.ename,
         isJoin: this.data.isJoin,
+        shortName: this.data.userInfo.nickName
       },
     })
       .then(res => {
-        if(res.result._id == -1){
+        if(res.result.res._id == -1){
           wx.showToast({
-            title: res.result.errMsg,
+            title: res.result.res.errMsg,
             icon: 'none',
             duration: 3000
           })
@@ -107,13 +101,13 @@ Page({
             // 传给云函数的参数
           })
             .then(res => {
-              console.log(res.result)
               this.setData({
                 ...(res.result)
               })
             })
             .catch(console.error)
         }
+        //不论是否添加成功都要重置
         this.formReset()
       })
       .catch(console.error)

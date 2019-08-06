@@ -46,6 +46,11 @@ page {
   border: none;
 }
 
+.detailPart{
+  width:100%;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
 
 .tunnel-text {
   line-height: 52px;
@@ -65,7 +70,11 @@ page {
   box-sizing: border-box;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-
+.section__title{
+  display: flex;
+  direction: row;
+  justify-content: space-around;
+}
 .tunnel-text:first-child {
   border-top: none;
 }
