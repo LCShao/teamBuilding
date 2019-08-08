@@ -11,9 +11,16 @@ Page({
     Fp: 0,
     Tp: 0,
     ename:'',
-    isJoin: true
+    phone:'',
+    isJoin: true,
+    dialogvisible: false,
+    title: '',
+    content: '小程序需要您的授权才能提供更好的服务哦'
   },
-
+  onReady: function () {
+    //获得dialog组件
+    this.dialog = this.selectComponent("#dialog");
+  },
   onLoad: function() {
     if (!wx.cloud) {
       wx.redirectTo({
@@ -21,7 +28,7 @@ Page({
       })
       return
     }
-
+   
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -35,18 +42,23 @@ Page({
               })
             }
           })
+        }else{
+          this.showDialog();
         }
       }
     })
     wx.cloud.callFunction({
-      // 云函数名称
+      // 获取已经报名的人数
       name: 'getTotal',
-      // 传给云函数的参数
+      // 返回参加 和 不参加的人数
     }).then(res => {
         this.setData({
           ...(res.result)
         })
       }).catch(console.error)
+  },
+  onShow: function(){
+
   },
   onGetUserInfo: function (e) {
     if (!this.logged && e.detail.userInfo) {
@@ -57,10 +69,14 @@ Page({
       })
     }
   },
-
   getEname:function(e){
     this.setData({
       ename: e.detail.value
+    })
+  },
+  getPhone: function (e) {
+    this.setData({
+      phone: e.detail.value
     })
   },
   getIsJoin:function(e){
@@ -77,11 +93,10 @@ Page({
       })
     }else{
       wx.cloud.callFunction({
-      // 云函数名称
       name: 'addone',
-      // 传给云函数的参数
       data: {
         ename: this.data.ename,
+        phone:this.data.phone,
         isJoin: this.data.isJoin,
         shortName: this.data.userInfo.nickName
       },
@@ -96,9 +111,7 @@ Page({
         }else{
             //刷新进度条
           wx.cloud.callFunction({
-            // 云函数名称
             name: 'getTotal',
-            // 传给云函数的参数
           })
             .then(res => {
               this.setData({
@@ -116,7 +129,51 @@ Page({
   formReset: function () {
     this.setData({
       ename: "",
+      phone: "",
       isJoin: true
     })
+  },
+  showDialog: function () {
+    this.setData({
+      dialogvisible: true
+    })
+  },
+  // handleClose: function () {
+  //   //如果不授权 则不能区分微信用户 报名时则不能实名制
+  //   this.shortName = "用户",
+  //   this.avatarUrl = './user-unlogin.png'
+  //   wx.showToast({
+  //     title: '请重新打开小程序进行授权',
+  //     icon: 'none'
+  //   })
+  // },
+  handleConfirm: function () {
+    wx.authorize({
+      scope: "scope.userInfo",
+      success: res => {
+        console.log(res)
+      },
+      fail: res => {
+        console.log(res)
+      }
+
+    })
+    // 
+    wx.openSetting({
+      success:res=> {
+        console.log(res.authSetting)
+        if (res.authSetting['scope.userInfo']) {
+            wx.getUserInfo({
+              success: res => {
+                // var c = getCurrentPages();
+                this.setData({
+                  avatarUrl: res.userInfo.avatarUrl,
+                  userInfo: res.userInfo
+                })
+            }
+          })
+        }
+      }
+     })
   },
 })

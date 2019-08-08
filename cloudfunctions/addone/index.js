@@ -7,6 +7,7 @@ const db = cloud.database();
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const ename = event.ename;
+  const phone = event.phone;
   const isJoin = event.isJoin;
   const shortName = event.shortName;
 // 添加之前先检查 是否是同一个微信昵称 只能用自己的微信给自己报名
@@ -24,7 +25,7 @@ exports.main = async (event, context) => {
       var res = await db.collection("emps").add({
         data: {
           // 员工姓名， 是否参加，添加时间，昵称
-          ename, isJoin, shortName, addTime: new Date().getTime()
+          ename, phone, isJoin, shortName, addTime: new Date().getTime()
         }
       });
     } else {
@@ -34,9 +35,9 @@ exports.main = async (event, context) => {
       res
     }
   }else{
-    // 如果微信昵称已存在 在添加就会提示
+    // 如果微信昵称已存在 添加多人就会提示
     if (emp.total == 0) {
-      var res = { _id: -1, errMsg: "不能重复报名!" }
+      var res = { _id: -1, errMsg: "您已报名!" }
       return {
         res
       }

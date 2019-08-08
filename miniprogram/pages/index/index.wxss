@@ -5,14 +5,17 @@ page {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background: -webkit-linear-gradient(top, rgba(0,175,180, 1), rgba(0,175,180, 0.1));
+
 }
 
 
 .userinfo{
-  margin-top: 40rpx;
+  /* margin-top: 40rpx; */
   height: 140rpx;
   width: 100%;
-  background: #fff;
+  background: #ffffff;
+  opacity: 1;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-left: none;
   border-right: none;
@@ -28,7 +31,7 @@ page {
   margin: 20rpx;
   border-radius: 50%;
   background-size: cover;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .userinfo-avatar:after {
@@ -101,4 +104,11 @@ page {
 }
 .inputdialog{
   width:60%;
+}
+.dialog{
+  padding-top:30rpx;
+  font-size: 30rpx;
+  color: black;
+  text-align: center;
+  vertical-align: center;
 }
