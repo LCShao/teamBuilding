@@ -11,15 +11,24 @@ Page({
     Fp: 0,
     Tp: 0,
     ename:'',
-    phone:'',
+    phoneNo:'',
     isJoin: true,
     dialogvisible: false,
     title: '',
     content: '小程序需要您的授权才能提供更好的服务哦'
   },
+//  onShow:function(){
+//    if (typeof this.getTabBar === 'function' &&
+//      this.getTabBar()) {
+//      this.getTabBar().setData({
+//        selected: 0
+//      })
+//    }
+//  },
   onReady: function () {
     //获得dialog组件
     this.dialog = this.selectComponent("#dialog");
+    
   },
   onLoad: function() {
     if (!wx.cloud) {
@@ -42,9 +51,10 @@ Page({
               })
             }
           })
-        }else{
-          this.showDialog();
         }
+        //else{
+          // this.showDialog();
+        //}
       }
     })
     wx.cloud.callFunction({
@@ -57,9 +67,9 @@ Page({
         })
       }).catch(console.error)
   },
-  onShow: function(){
+  // onShow: function(){
 
-  },
+  // },
   onGetUserInfo: function (e) {
     if (!this.logged && e.detail.userInfo) {
       this.setData({
@@ -75,9 +85,26 @@ Page({
     })
   },
   getPhone: function (e) {
-    this.setData({
-      phone: e.detail.value
-    })
+    //手机号是数字的验证
+    // if(typeof(e.detail.value)=="string"){
+    //   wx.showToast({
+    //     title: '请输入正确的号码!',
+    //     icon: 'none',
+    //     duration: 2000
+    //   })
+    // }else{
+    //   if (e.detail.value.length < 11 && e.detail.value.length >0){
+    //     wx.showToast({
+    //       title: '请输入正确的号码!',
+    //       icon: 'none',
+    //       duration: 2000
+    //     })
+    //   }else{
+        this.setData({
+          phoneNo: e.detail.value
+        })
+    //   }
+    // }
   },
   getIsJoin:function(e){
     this.setData({
@@ -85,30 +112,40 @@ Page({
     })
   },
   formSubmit: function (e) {
-    if(this.data.ename == ""){
+
+    if (this.data.ename == "" || this.data.phoneNo == ""){
       wx.showToast({
-        title: '姓名不能为空!',
+        title: '必填项不能为空!',
         icon: 'none',
         duration: 3000
       })
     }else{
-      wx.cloud.callFunction({
-      name: 'addone',
-      data: {
-        ename: this.data.ename,
-        phone:this.data.phone,
-        isJoin: this.data.isJoin,
-        shortName: this.data.userInfo.nickName
-      },
-    })
-      .then(res => {
-        if(res.result.res._id == -1){
+      if (this.data.phoneNo.length<11){
+        wx.showToast({
+        title: '请输入正确的号码!',
+        icon: 'none',
+        duration: 2000
+      })
+      }else{
+        wx.cloud.callFunction({
+          name: 'addone',
+          data: {
+            ename: this.data.ename,
+            phoneNo: this.data.phoneNo,
+            isJoin: this.data.isJoin
+            // shortName: this.data.userInfo.nickName
+          }
+        })
+     .then(res => {
+
+        // console.log(res)
+        // if (res.result.res.errMsg){
           wx.showToast({
-            title: res.result.res.errMsg,
+            title: "报名成功！",
             icon: 'none',
             duration: 3000
-          })
-        }else{
+          }),
+        // }else{
             //刷新进度条
           wx.cloud.callFunction({
             name: 'getTotal',
@@ -119,24 +156,35 @@ Page({
               })
             })
             .catch(console.error)
-        }
+        // }
         //不论是否添加成功都要重置
         this.formReset()
       })
       .catch(console.error)
     }
+    }
   },
   formReset: function () {
     this.setData({
       ename: "",
-      phone: "",
+      phoneNo: "",
       isJoin: true
     })
   },
-  showDialog: function () {
+  resetname: function(){
     this.setData({
-      dialogvisible: true
+      ename: "",
+     })
+  },
+  resetphone:function(){
+    this.setData({
+      phoneNo: ""
     })
+  },
+  showDialog: function () {
+    // this.setData({
+    //   dialogvisible: true
+    // })
   },
   // handleClose: function () {
   //   //如果不授权 则不能区分微信用户 报名时则不能实名制
@@ -147,33 +195,36 @@ Page({
   //     icon: 'none'
   //   })
   // },
-  handleConfirm: function () {
-    wx.authorize({
-      scope: "scope.userInfo",
-      success: res => {
-        console.log(res)
-      },
-      fail: res => {
-        console.log(res)
-      }
 
-    })
+  handleConfirm: function () {
+    // wx.authorize({
+    //   scope: "scope.userInfo",
+    //   success: res => {
+    //     console.log(res)
+    //   },
+    //   fail: res => {
+    //     console.log(res)
+    //   }
+
+    // })
     // 
-    wx.openSetting({
-      success:res=> {
-        console.log(res.authSetting)
-        if (res.authSetting['scope.userInfo']) {
-            wx.getUserInfo({
-              success: res => {
-                // var c = getCurrentPages();
-                this.setData({
-                  avatarUrl: res.userInfo.avatarUrl,
-                  userInfo: res.userInfo
-                })
-            }
-          })
-        }
-      }
-     })
+    // wx.openSetting({
+    //   success:res=> {
+    //     console.log(res.authSetting)
+    //     if (res.authSetting['scope.userInfo']) {
+    //         wx.getUserInfo({
+    //           success: res => {
+    //             // var c = getCurrentPages();
+    //             this.setData({
+    //               avatarUrl: res.userInfo.avatarUrl,
+    //               userInfo: res.userInfo
+    //             })
+    //         }
+    //       })
+    //     }
+    //   }
+    //  })
   },
+
+
 })

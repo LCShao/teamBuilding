@@ -1,4 +1,5 @@
 <!--pages/chooseLib/chooseLib.wxml-->
+<tabbar></tabbar>
 <view class="container">
 
   <view class="list">
