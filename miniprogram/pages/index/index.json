@@ -1,6 +1,6 @@
 {
+  "navigationBarTitleText": "团建报名页",
   "usingComponents": {
-    "dialog":"/components/dialog",
-    "tabbar":"/custom-tabbar/custom-tab-bar"
+    "dialog":"/components/dialog"
   }
 }

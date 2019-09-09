@@ -19,23 +19,5 @@
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json",
-  "tabBar": {
-    "custom": true,
-    "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-     "list": [
-      {
-      "pagePath": "pages/index/index",
-      "text": "报名页"
-      },
-      {
-        "pagePath": "pages/chooseLib/chooseLib",
-        "text": "活动详情"
-      }
-    ]
-  },
-  "usingComponents": {}
+  "sitemapLocation": "sitemap.json"
 }

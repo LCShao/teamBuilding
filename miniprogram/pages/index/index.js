@@ -25,11 +25,11 @@ Page({
 //      })
 //    }
 //  },
-  onReady: function () {
-    //获得dialog组件
-    this.dialog = this.selectComponent("#dialog");
+  // onReady: function () {
+  //   //获得dialog组件
+  //   this.dialog = this.selectComponent("#dialog");
     
-  },
+  // },
   onLoad: function() {
     if (!wx.cloud) {
       wx.redirectTo({

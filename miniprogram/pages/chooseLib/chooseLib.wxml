@@ -2,14 +2,48 @@
 <tabbar></tabbar>
 <view class="container">
 
+<view class="detailPart">
   <view class="list">
     <view class="list-item">
-      <text class="black">初始化失败</text>
+      <text class="black">出行信息</text>
     </view>
     <view class="list-item">
-      <text class="request-text">请使用 2.2.3 或以上的基础库以使用云能力</text>
+      <text class="request-text">活动时间：</text><text class="request-content">{{playtime}}</text>
+    </view>
+    <view class="list-item">
+      <text class="request-text">出发地点：</text><text class="request-content">{{startplace}}</text>
+    </view>
+    <view class="list-item">
+      <text class="request-text">活动地点：</text><text class="request-content">{{endplace}}</text>
+    </view>
+    <view class="list-item">
+      <text class="request-text">出行方式：</text><text class="request-content">{{wayoption}}</text>
+    </view>
+    <view class="list-item comments">
+      <text class="request-text">备注信息：</text><rich-text class="request-content commentsdialog">{{comments}}</rich-text>
     </view>
   </view>
-
+</view>
+<!-- <view> -->
+ <progress active percent="{{Tp}}"  stroke-width="30" class="progress" activeColor="#ffffff" backgroundColor="#4f9d9d">
+    <text class="text">{{Tp}}人已报名</text>
+  </progress>
+<!-- </view> -->
+  <view class='contentBottom'>
+        <swiper class="tab-right" style='background:{{bgColor}};' vertical="true" autoplay="false" circular="true" interval="2000" display-multiple-items='4'>
+            <view class="right-item">
+                <block wx:for-index="idx" wx:for='{{aa}}'>
+                    <swiper-item>
+                        <view class='content-item'>
+                            <image src='{{avatarUrl}}' class='avater'></image>
+                            <text class='name'>{{item.ename}}</text>
+                            <text class='wawa'>{{item.phoneNo}}</text>
+                        </view>
+                    </swiper-item>
+                </block> 
+                
+            </view>
+        </swiper>
+    </view>
 </view>
 

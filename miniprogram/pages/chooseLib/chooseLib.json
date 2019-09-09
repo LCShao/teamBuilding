@@ -1,6 +1,3 @@
 {
-  "navigationBarTitleText": "选择基础库",
-  "usingComponents": {
-    "tabbar": "/custom-tabbar/custom-tab-bar"
-  }
+  "navigationBarTitleText": "团建详情页"
 }
