@@ -7,11 +7,11 @@ Page({
   data: {
     avatarUrl: './user-unlogin.png',
     Tp:0,
-    playtime:'8月31日',
+    playtime:'9月20日 3pm to 8:30pm',
     startplace:'软通动力西门集合',
-    endplace:'集体活动+吃饭+饭后散步',
+    endplace:'奥森公园健步走+吃饭',
     wayoption:'自己到达（拼车 或者 坐地铁）',
-    comments:'请记得保管好钱包，钥匙，手机等贵重物品，保持手机畅通方便及时联系，谢谢配合',
+    comments:'1. 如无特殊原因不予请假。2. 我们加入HIG以后，每次团建活动都需要提供集体照片，请大家当天到活动地点后一起照个合影。谢谢配合~',
     aa:[],
   },
  
@@ -34,8 +34,14 @@ Page({
       name: 'getJoined',
       // 返回参加人的所有信息
     }).then(res => {
+      var aa= res.result;
+      if (aa.length<4){
+        for(var i=0;i<=4-aa.length;i++){
+          aa.push({ename:"",phoneNo:""})
+        }
+      }
       this.setData({
-         aa: res.result
+        aa
       })
     }).catch(console.error)
   },

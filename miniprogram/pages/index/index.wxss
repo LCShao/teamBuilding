@@ -5,7 +5,7 @@ page {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: -webkit-linear-gradient(top, rgba(0,175,180, 1), rgba(0,175,180, 0.1));
+  /* background: -webkit-linear-gradient(top, rgba(0,175,180, 1), rgba(0,175,180, 0.1)); */
 
 }
 
@@ -13,7 +13,7 @@ page {
 .userinfo{
   height: 140rpx;
   width: 100%;
-  background:rgba(0,175,180, 1);
+  background:rgba(0, 174, 180, 0.486);
   opacity: 1;
   border-left: none;
   border-bottom: 1px solid rgba(0,175,180, 0.1);
@@ -39,9 +39,10 @@ page {
 }
 
 .userinfo-nickname {
+  /* align-self: flex-end; */
   font-size: 32rpx;
   color: white;
-  background-color: rgba(0,175,180, 1);
+ background:rgba(113, 232, 236, 0);
   background-size: cover;
 }
 

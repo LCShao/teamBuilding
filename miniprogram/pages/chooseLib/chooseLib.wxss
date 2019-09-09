@@ -98,7 +98,8 @@
 }
 .wawa {
     font-size: 26rpx;
-    float: right;
+    float: left;
     line-height: 100rpx;
     color: #336666;
+    text-align: left;
 }

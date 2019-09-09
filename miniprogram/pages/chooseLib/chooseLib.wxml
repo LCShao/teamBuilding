@@ -30,7 +30,7 @@
   </progress>
 <!-- </view> -->
   <view class='contentBottom'>
-        <swiper class="tab-right" style='background:{{bgColor}};' vertical="true" autoplay="false" circular="true" interval="2000" display-multiple-items='4'>
+        <swiper class="tab-right" style='background:{{bgColor}};' vertical="true" circular="true" interval="2000" display-multiple-items="4" >
             <view class="right-item">
                 <block wx:for-index="idx" wx:for='{{aa}}'>
                     <swiper-item>

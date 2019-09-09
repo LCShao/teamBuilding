@@ -112,15 +112,14 @@ Page({
     })
   },
   formSubmit: function (e) {
-
+    var a = new RegExp("^1[3-9]\\d{9}$");
     if (this.data.ename == "" || this.data.phoneNo == ""){
       wx.showToast({
         title: '必填项不能为空!',
         icon: 'none',
         duration: 3000
       })
-    }else{
-      if (this.data.phoneNo.length<11){
+    }else if(!a.test(this.data.phoneNo)){
         wx.showToast({
         title: '请输入正确的号码!',
         icon: 'none',
@@ -128,41 +127,58 @@ Page({
       })
       }else{
         wx.cloud.callFunction({
-          name: 'addone',
-          data: {
-            ename: this.data.ename,
-            phoneNo: this.data.phoneNo,
-            isJoin: this.data.isJoin
-            // shortName: this.data.userInfo.nickName
+          name:'queryPhoneNumber',
+          data:{
+            phoneNo: this.data.phoneNo
+          }
+        }).then(res=>{
+          // console.log(res.result.total)
+          if (res.result.total==0){
+            wx.cloud.callFunction({
+              name: 'addone',
+              data: {
+                ename: this.data.ename,
+                phoneNo: this.data.phoneNo,
+                isJoin: this.data.isJoin
+                // shortName: this.data.userInfo.nickName
+              }
+            })
+              .then(res => {
+
+                // console.log(res)
+                // if (res.result.res.errMsg){
+                wx.showToast({
+                  title: "报名成功！",
+                  icon: 'none',
+                  duration: 3000
+                }),
+                  // }else{
+                  //刷新进度条
+                  wx.cloud.callFunction({
+                    name: 'getTotal',
+                  })
+                    .then(res => {
+                      this.setData({
+                        ...(res.result)
+                      })
+                    })
+                    .catch(console.error)
+                // }
+                //不论是否添加成功都要重置
+                this.formReset()
+              })
+              .catch(console.error)
+          }else{
+            wx.showToast({
+              title: '不能重复报名!',
+              icon: 'none',
+              duration: 2000
+            })
           }
         })
-     .then(res => {
-
-        // console.log(res)
-        // if (res.result.res.errMsg){
-          wx.showToast({
-            title: "报名成功！",
-            icon: 'none',
-            duration: 3000
-          }),
-        // }else{
-            //刷新进度条
-          wx.cloud.callFunction({
-            name: 'getTotal',
-          })
-            .then(res => {
-              this.setData({
-                ...(res.result)
-              })
-            })
-            .catch(console.error)
-        // }
-        //不论是否添加成功都要重置
-        this.formReset()
-      })
-      .catch(console.error)
+       
     }
-    }
+    // }
   },
   formReset: function () {
     this.setData({
@@ -181,11 +197,11 @@ Page({
       phoneNo: ""
     })
   },
-  showDialog: function () {
+  // showDialog: function () {
     // this.setData({
     //   dialogvisible: true
     // })
-  },
+  // },
   // handleClose: function () {
   //   //如果不授权 则不能区分微信用户 报名时则不能实名制
   //   this.shortName = "用户",
@@ -196,7 +212,7 @@ Page({
   //   })
   // },
 
-  handleConfirm: function () {
+  // handleConfirm: function () {
     // wx.authorize({
     //   scope: "scope.userInfo",
     //   success: res => {
@@ -224,7 +240,7 @@ Page({
     //     }
     //   }
     //  })
-  },
+  // },
 
 
 })
